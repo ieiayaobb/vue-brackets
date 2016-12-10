@@ -1,25 +1,23 @@
 <template>
 	<div>
-		<compete></compete>
-		<compete></compete>
-		<compete></compete>
-		<compete></compete>
+		<match></match>
+		<match></match>
+		<match></match>
+		<match></match>
 	</div>
 </template>
 
 <script>
-import Compete from './Compete'
+import Match from './Match'
 
 export default {
   name: 'Round',
   components: {
-  	Compete
+  	Match
   }
 }
 </script>
 
 <style>
-.compete {
-	margin-top: 40px;
-}
+
 </style>

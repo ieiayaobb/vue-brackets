@@ -2,7 +2,7 @@
 	<div class="player-item">
 		<div class="thumbnail"></div>
 		<div class="player">
-			<span class="player-name">波多野结衣</span>
+			<span class="player-name">原始咆哮</span>
 		</div>
 		<div class="score" v-bind:class="updownClass">3</div>
 	</div>
