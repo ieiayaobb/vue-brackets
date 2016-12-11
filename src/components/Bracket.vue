@@ -1,8 +1,6 @@
 <template>
-	<div>
-		<round class="round" :round-num=0></round>
-		<round class="round" :round-num=1></round>
-		<round class="round" :round-num=2></round>
+	<div class="bracket" v-bind:style="{width:bracketWidth, height: bracketHeight}">
+		<round :roundNum="n" v-for="n in roundsCount" :isFirst=" n == 1" :isLast="n  == roundsCount" :playersCount="playersCount"></round>
 	</div>
 </template>
 
@@ -11,6 +9,27 @@ import Round from './Round'
 
 export default {
   name: 'bracket',
+  props: {
+  	bracketWidth: {
+  		type: Number,
+  		required :false
+  	},
+    playersCount: {
+        type: Number,
+        required: true
+    }
+  },
+  computed: {
+  	roundsCount: function() {
+  		return Math.log(this.playersCount) / Math.LN2
+  	},
+  	bracketWidth: function() {
+  		return this.roundsCount * 280 + "px";
+  	},
+  	bracketHeight: function() {
+  		return this.playersCount / 2 * 100 + "px";
+  	}
+  },
   components: {
     Round
   }
@@ -18,9 +37,13 @@ export default {
 </script>
 
 <style>
-.round {
-	float: left;
-	width: 220px;
-	margin-left: 20px;
+.bracket {
+	cursor: move;
+}
+.bracket:after {
+	content: '\20';
+	display: block;
+	height: 0;
+	clear: both;
 }
 </style>

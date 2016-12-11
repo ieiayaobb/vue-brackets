@@ -1,6 +1,6 @@
 <template>
-	<div class="drag-zone" ref="drag_zone" @mousedown.prevent="dragStart" @mouseup="dragStop">
-		<bracket class="bracket">
+	<div class="drag-zone" @mousedown="dragStart" @mouseup="dragStop">
+		<bracket :playersCount=playersCount class="bracket">
 		</bracket>
 	</div>	
 </template>
@@ -8,26 +8,24 @@
 <script>
 import Bracket from './Bracket'
 
-
 export default {
   name: 'bracketView',
+  props: {
+    playersCount: {
+        type: Number,
+        required: true
+    }
+  },
   methods: {
   	dragStart(mde) {
-  		console.log(mde)
-  		var drag_zone = this.$refs.drag_zone
-  		var handle_taget = mde.target
-		
-		while (handle_taget != drag_zone){
-			handle_taget = handle_taget.parentNode
-			console.log(handle_taget)
-			console.log(drag_zone)
-			console.log(handle_taget == drag_zone)
-		}
+      var drag_zone = this.$el
+		  var init_left = this.$el.offsetLeft
+		  var init_top = this.$el.offsetTop
   		window.onmousemove = function(mve) {
-  			var left = Math.round(mve.pageX - handle_taget.offsetX) + "px";
-  			var top = Math.round(mve.pageY - handle_taget.offsetY) + "px"
-  			drag_zone.style.left = left
-  			drag_zone.style.top = top
+  			var left = init_left + mve.pageX - mde.pageX
+  			var top = init_top + mve.pageY - mde.pageY
+  			drag_zone.style.left = left + "px"
+  			drag_zone.style.top = top + "px"
   		}
   	},
   	dragStop(mue) {
@@ -44,18 +42,10 @@ export default {
 <style>
 	.drag-zone {
 		position: relative;
-		border: 1px #FFF solid;
+    width: 2000px;
+		/*border: 1px #FFF solid;*/
 	}
 
-	.bracket {
-		height: 500px;
-		cursor: move;
-	}
-	.bracket:after {
-		content: '\20';
-    	display: block;
-    	height: 0;
-    	clear: both;
-	}
+	
 
 </style>

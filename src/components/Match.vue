@@ -1,7 +1,9 @@
 <template>
-	<div class="match">
-		<playerItem class="player1" :updown=false></playerItem>
-		<playerItem class="player2" :updown=true></playerItem>
+	<div class="match" v-bind:class="[type, {last: isLast}, {fisrt: isFirst}]">
+        <div class="players">
+    		<playerItem class="player1" :updown=false></playerItem>
+    		<playerItem class="player2" :updown=true></playerItem>
+        </div>
 	</div>
 </template>
 
@@ -10,6 +12,32 @@ import PlayerItem from './PlayerItem'
 
 export default {
   name: 'Match',
+  props: {
+    even: {
+        default: true,
+        type: Boolean,
+        required: true
+    },
+    isFirst: {
+        default: false,
+        type: Boolean,
+        required: false
+    },
+    isLast: {
+        default: false,
+        type: Boolean,
+        required: false
+    }
+  },
+  computed: {
+    type: function() {
+        if (this.even) {
+            return "match-even";
+        } else {
+            return "match-odd";
+        }
+    }
+  },
   components: {
   	PlayerItem
   }
@@ -19,34 +47,64 @@ export default {
 <style>
 .match {
 	position: relative;
-	float: left;
-	width: 220px;
-	margin-top: 40px;
+	width: 260px;
 	padding: 20px;
 }
 
-.match:before {
+.match:after {
+    content: ' ';
+    position: absolute;
+    display: block;
+    width: 15px;
+    height: 2px;
+    background: #FFF;
+    top: 50%;
+    left: 0px;
+    margin-left: -20px;
+}
+
+.match-even:before {
 	content: ' ';
     position: absolute;;
     display: block;
-    width: 20px;
+    width: 15px;
     height: 50%;
     color: #FFF;
-    right: 20px;
+    right: 0px;
     bottom: 0;
     border: 2px solid;
     border-bottom-width: 0;
     border-left-width: 0;
 }
 
-.match:after {
-	content: ' ';
-    position: absolute;
+.match-odd:before {
+    content: ' ';
+    position: absolute;;
     display: block;
-    width: 20px;
-    height: 2px;
-    background: #FFF;
-    top: 50%;
-    left: -20px;
+    width: 15px;
+    height: 50%;
+    color: #FFF;
+    right: 0px;
+    top: 0;
+    border: 0 solid;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
 }
+
+.players {
+    position: absolute;
+    width: 220px;
+    height: 52px;
+    top: 50%;
+    margin-top: -26px;
+}
+
+.fisrt:after {
+    content: none;    
+}
+
+.last:before {
+    content: none;
+}
+
 </style>
