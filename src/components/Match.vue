@@ -1,5 +1,5 @@
 <template>
-	<div class="match" v-bind:class="[type, {last: isLast}, {fisrt: isFirst}]">
+	<div class="match" v-bind:class="[type, {last: isLast}, {fisrt: isFirst}]" v-bind:style="{visibility:visibleStr}">
         <div class="players">
     		<playerItem class="player1" :updown=false></playerItem>
     		<playerItem class="player2" :updown=true></playerItem>
@@ -27,6 +27,11 @@ export default {
         default: false,
         type: Boolean,
         required: false
+    },
+    visibleStatus: {
+        default: true,
+        type: Boolean,
+        required: true
     }
   },
   computed: {
@@ -35,6 +40,13 @@ export default {
             return "match-even";
         } else {
             return "match-odd";
+        }
+    },
+    visibleStr: function() {
+        if (this.visibleStatus){
+            return 'visbility'
+        } else {
+            return 'hidden'
         }
     }
   },
