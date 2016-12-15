@@ -11,7 +11,8 @@ export default {
   name: 'Round',
   data: function() {
     return {
-      show: true
+      show: true,
+      show_list:[1, 17, 9, 25, 5, 21, 13]
     }
   },
   props: {
@@ -33,6 +34,10 @@ export default {
     playersCount: {
         type: Number,
         required: true
+    },
+    showList: {
+        type: Array,
+        required: true
     }
   },
   computed: {
@@ -43,11 +48,20 @@ export default {
       var num = this.playersCount / 2 / (Math.pow(2, this.roundNum - 1));
       return num
     }
-    
   },
   methods: {
     visibleStatus: function(index) {
-        return !this.isFirst || (index % 2 != 0)
+    	if (this.isFirst){
+    		console.log(this.showList)
+    		for (var i = 0; i < this.showList.length; i++) {
+    			if (this.showList[i] == index){
+    				return true
+    			}
+    		}
+        	return false
+    	} else {
+    		return true
+    	}
     }
   },
   components: {

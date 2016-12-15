@@ -1,5 +1,5 @@
 <template>
-	<div class="match" v-bind:class="[type, {last: isLast}, {fisrt: isFirst}]" v-bind:style="{visibility:visibleStr}">
+	<div class="match" v-bind:class="[type, {last: isLast}, {fisrt: isFirst}, {hidden: !visibleStatus}]">
         <div class="players">
     		<playerItem class="player1" :updown=false></playerItem>
     		<playerItem class="player2" :updown=true></playerItem>
@@ -41,13 +41,6 @@ export default {
         } else {
             return "match-odd";
         }
-    },
-    visibleStr: function() {
-        if (this.visibleStatus){
-            return 'visbility'
-        } else {
-            return 'hidden'
-        }
     }
   },
   components: {
@@ -57,6 +50,10 @@ export default {
 </script>
 
 <style>
+.hidden {
+	visibility: hidden;
+}
+
 .match {
 	position: relative;
 	width: 260px;

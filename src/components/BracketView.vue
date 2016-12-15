@@ -1,6 +1,6 @@
 <template>
 	<div class="drag-zone" @mousedown="dragStart" @mouseup="dragStop">
-		<bracket :playersCount=playersCount class="bracket">
+		<bracket :playersCount=playersCount :originPlayersCount=originPlayersCount class="bracket">
 		</bracket>
 	</div>	
 </template>
@@ -12,6 +12,10 @@ export default {
   name: 'bracketView',
   props: {
     playersCount: {
+        type: Number,
+        required: true
+    },
+    originPlayersCount: {
         type: Number,
         required: true
     }

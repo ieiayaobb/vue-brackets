@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <bracketView :playersCount=playersCount|adjust></bracketView>
-    <input class="adjust" type="number" v-model.number="playersCount"/>
+    <bracketView :playersCount=playersCount|adjust :originPlayersCount=playersCount></bracketView>
+    <input class="adjust" type="number" v-model.number="playersCount" step="1" />
   </div>
 </template>
 
@@ -13,7 +13,7 @@ export default {
   name: 'app',
   data() {
     return {
-      playersCount: 16
+      playersCount: 13
     }
   },
   components: {
