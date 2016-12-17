@@ -1,15 +1,19 @@
 <template>
-	<div class="drag-zone" @mousedown="dragStart" @mouseup="dragStop">
+	<div class="drag-zone" v-bind:class="[{scale: scaleUp}]" @mousedown="dragStart" @mouseup="dragStop">
 		<bracket :playersCount=playersCount :originPlayersCount=originPlayersCount class="bracket">
 		</bracket>
 	</div>	
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Bracket from './Bracket'
 
 export default {
   name: 'bracketView',
+  computed: mapGetters({
+    scaleUp: 'scaleUp'
+  }),
   props: {
     playersCount: {
         type: Number,
@@ -39,7 +43,11 @@ export default {
   components: {
     Bracket
   },
-  
+  vuex: {
+    getters: {
+      scaleUp: (state) => state.scaleUp
+    }
+  }
 }
 </script>
 
@@ -50,6 +58,7 @@ export default {
 		/*border: 1px #FFF solid;*/
 	}
 
-	
-
+  .scale {
+    zoom: 75%;
+  }
 </style>

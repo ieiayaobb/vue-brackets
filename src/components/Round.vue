@@ -11,8 +11,7 @@ export default {
   name: 'Round',
   data: function() {
     return {
-      show: true,
-      show_list:[1, 17, 9, 25, 5, 21, 13]
+      show: true
     }
   },
   props: {
@@ -52,7 +51,6 @@ export default {
   methods: {
     visibleStatus: function(index) {
     	if (this.isFirst){
-    		console.log(this.showList)
     		for (var i = 0; i < this.showList.length; i++) {
     			if (this.showList[i] == index){
     				return true
