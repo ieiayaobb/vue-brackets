@@ -1,5 +1,7 @@
 <template>
-	<div class="match" v-bind:class="[type, {last: isLast}, {fisrt: isFirst}, {hidden: !visibleStatus}]">
+	<div 
+	class="match" 
+	v-bind:class="[type, {last: isLast}, {fisrt: isFirst}, {hidden: !visibleStatus}]">
         <div class="players">
     		<playerItem class="player1" :updown=false></playerItem>
     		<playerItem class="player2" :updown=true></playerItem>

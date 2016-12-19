@@ -1,9 +1,16 @@
 <template>
   <div id="app">
-    <bracketView :playersCount=playersCount|adjust :originPlayersCount=playersCount></bracketView>
-    <input class="adjust" type="number" v-model.number="playersCount" step="1" />
-    <input type="button" value="缩小" @click="zoomIn" />
-    <input type="button" value="正常" @click="normal" />
+    <div class="control-bar">
+      <input class="adjust" type="number" v-model.number="playersCount" step="1" />
+      <input type="button" value="缩小" @click="zoomIn" />
+      <input type="button" value="正常" @click="normal" />
+    </div>
+    <div class="main">
+      <bracketView 
+      :playersCount=playersCount|adjust 
+      :originPlayersCount=playersCount>
+      </bracketView>
+    </div>
   </div>
 </template>
 
@@ -50,6 +57,16 @@ export default {
 
 body {
   background-color: #1E2227;
+}
+
+.control-bar {
+  width: 20%;
+  float: left;
+}
+
+.main {
+  width: 80%;
+  float: left;
 }
 
 .adjust {

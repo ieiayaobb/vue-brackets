@@ -1,6 +1,12 @@
 <template>
-	<div class="drag-zone" v-bind:class="[{scale: scaleUp}]" @mousedown="dragStart" @mouseup="dragStop">
-		<bracket :playersCount=playersCount :originPlayersCount=originPlayersCount class="bracket">
+	<div 
+	id="bracket-view"
+	class="drag-zone dragdealer" 
+	v-bind:class="[{scale: scaleUp}]">
+		<bracket 
+		:playersCount=playersCount 
+		:originPlayersCount=originPlayersCount 
+		class="bracket handle">
 		</bracket>
 	</div>	
 </template>
@@ -9,11 +15,19 @@
 import { mapGetters } from 'vuex'
 import Bracket from './Bracket'
 
+import Dragdealer from 'dragdealer'
+
 export default {
   name: 'bracketView',
   computed: mapGetters({
     scaleUp: 'scaleUp'
   }),
+  data() {
+  	return {
+  		dragdealer: null,
+  		move: false
+  	}
+  },
   props: {
     playersCount: {
         type: Number,
@@ -24,21 +38,20 @@ export default {
         required: true
     }
   },
+  mounted () {
+  	this.dragdealer = new Dragdealer('bracket-view', {
+	    x: 0,
+	    // Start in the bottom-left corner
+	    y: 0,
+	    vertical: true,
+	    speed: 0.2,
+	    loose: true
+	  });
+  },
+  beforeUpdate () {
+  	// this.dragdealer.reflow()
+  },
   methods: {
-  	dragStart(mde) {
-      var drag_zone = this.$el
-		  var init_left = this.$el.offsetLeft
-		  var init_top = this.$el.offsetTop
-  		window.onmousemove = function(mve) {
-  			var left = init_left + mve.pageX - mde.pageX
-  			var top = init_top + mve.pageY - mde.pageY
-  			drag_zone.style.left = left + "px"
-  			drag_zone.style.top = top + "px"
-  		}
-  	},
-  	dragStop(mue) {
-  		window.onmousemove = null;
-  	}
   },
   components: {
     Bracket
@@ -52,10 +65,13 @@ export default {
 </script>
 
 <style>
-	.drag-zone {
-		position: relative;
-    width: 2000px;
+	/*.drag-zone {*/
+		/*position: relative;*/
+    	/*width: 2000px;*/
 		/*border: 1px #FFF solid;*/
+	/*}*/
+	.dragdealer {
+		overflow: hidden;
 	}
 
   .scale {

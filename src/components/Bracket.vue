@@ -1,10 +1,19 @@
 <template>
-	<div class="bracket" v-bind:style="{width:bracketWidth, height: bracketHeight}">
-		<round :roundNum="n" v-for="n in roundsCount" :isFirst=" n == 1" :isLast="n  == roundsCount" :playersCount="playersCount" :showList=showList></round>
+	<div 
+	class="bracket" 
+	v-bind:style="{width:bracketWidth, height: bracketHeight}">
+		<round 
+		:roundNum="n" v-for="n in roundsCount"
+		:isFirst=" n == 1"
+		:isLast="n  == roundsCount"
+		:playersCount="playersCount" 
+		:showList=showList>
+		</round>
 	</div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Round from './Round'
 
 export default {
@@ -24,6 +33,9 @@ export default {
     }
   },
   computed: {
+  	...mapGetters({
+		initData: 'initData'
+	}),
   	roundsCount: function() {
   		return Math.log(this.playersCount) / Math.LN2
   	},
@@ -42,6 +54,10 @@ export default {
   		}
   		return show_list
   	}
+  },
+  created () {
+  	this.$store.dispatch('initBracket')
+  	console.log(this.initData)
   },
   components: {
     Round
@@ -65,7 +81,7 @@ export default {
 
 <style>
 .bracket {
-	cursor: move;
+	cursor: pointer;
 }
 .bracket:after {
 	content: '\20';

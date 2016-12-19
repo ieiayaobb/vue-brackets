@@ -5,7 +5,12 @@
 			<span class="player-name" @click="edit" v-show="editing">{{ label }}</span>
 			<input ref="editing" class="editing" @blur="display" type="text" v-model="label" v-show="!editing" />
 		</div>
-		<div class="score" v-bind:class="updownClass" @click="adjustScore">3</div>
+		<div class="score" v-bind:class="updownClass" @click="adjustScore">{{ score }}</div>
+		<div v-show="control" class="control">
+			<span class="arrow arrow-up" @click="increse"></span>
+			<span class="arrow arrow-down" @click="decrese"></span>
+			<span class="arrow arrow-right"></span>
+		</div>
 	</div>
 </template>
 
@@ -21,7 +26,9 @@ export default {
   data() {
   	return {
   		editing: true,
-  		label: "原始咆哮"
+  		control: false,
+  		label: "原始咆哮",
+  		score: 0
   	}
   },
   computed: {
@@ -36,14 +43,19 @@ export default {
   methods: {
   	edit: function(e) {
   		this.editing = false
-  		// console.log(this.$refs.editing)
   		this.$refs.editing.focus()
   	},
   	display: function(e) {
   		this.editing = true
   	},
-  	adjustScore: function(e){
-  		console.log(e)
+  	adjustScore: function(e) {
+  		this.control = true
+  	},
+  	increse: function(e) {
+  		this.score ++;
+  	},
+  	decrese: function(e) {
+  		this.score --;
   	}
   }
 }
@@ -103,6 +115,48 @@ export default {
 	text-align: center;
 	padding-top: 6px;
 	cursor: pointer;
+}
+
+.control {
+	float: left;
+	position: relative;
+}
+
+.arrow {
+	cursor: pointer;
+}
+
+.arrow-up {
+	position: absolute;
+	top: -8px;
+	left: -20px;
+	width: 0; 
+	height: 0; 
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-bottom: 6px solid #FFF;
+}
+
+.arrow-down {
+	position: absolute;
+	top: 26px;
+	left: -20px;
+	width: 0; 
+	height: 0; 
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid #FFF;
+}
+
+.arrow-right {
+	position: absolute;
+	top: 6px;
+	left: 2px;
+	width: 0; 
+	height: 0; 
+	border-top: 6px solid transparent;
+	border-bottom: 6px solid transparent;
+	border-left: 6px solid #FFF;
 }
 
 .up {

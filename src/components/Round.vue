@@ -1,6 +1,12 @@
 <template>
 	<div class="round">
-		<match :even="n % 2 != 0" v-for="n in matchNum" :isLast="isLast" :isFirst="isFirst" v-bind:style="{height: roundHeight}" :visibleStatus="visibleStatus(n)"></match>
+		<match 
+		:even="n % 2 != 0" v-for="n in matchNum" 
+		:isLast="isLast" 
+		:isFirst="isFirst" 
+		v-bind:style="{height: roundHeight}" 
+		:visibleStatus="visibleStatus(n)">
+		</match>
 	</div>
 </template>
 
