@@ -1,7 +1,9 @@
 <template>
 	<div 
 	class="bracket" 
-	v-bind:style="{width:bracketWidth, height: bracketHeight}">
+	v-bind:style="{
+    width: bracketWidth, 
+    height: bracketHeight}">
 		<round 
 		:roundNum="n" v-for="n in roundsCount"
 		:isFirst=" n == 1"
@@ -19,10 +21,6 @@ import Round from './Round'
 export default {
   name: 'bracket',
   props: {
-  	bracketWidth: {
-  		type: Number,
-  		required :false
-  	},
     playersCount: {
         type: Number,
         required: true
@@ -35,7 +33,7 @@ export default {
   computed: {
   	...mapGetters({
 		initData: 'initData'
-	}),
+	  }),
   	roundsCount: function() {
   		return Math.log(this.playersCount) / Math.LN2
   	},

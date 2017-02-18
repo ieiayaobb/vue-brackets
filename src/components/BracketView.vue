@@ -42,14 +42,19 @@ export default {
   	this.dragdealer = new Dragdealer('bracket-view', {
 	    x: 0,
 	    // Start in the bottom-left corner
-	    y: 0,
+	    y: 1,
 	    vertical: true,
 	    speed: 0.2,
 	    loose: true
 	  });
   },
   beforeUpdate () {
+    console.log('beforeUpdate')
   	// this.dragdealer.reflow()
+  },
+  updated () {
+    console.log('updated')
+    this.dragdealer.reflow()
   },
   methods: {
   },
