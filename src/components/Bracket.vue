@@ -5,9 +5,10 @@
     width: bracketWidth, 
     height: bracketHeight}">
 		<round 
-		:roundNum="n" v-for="n in roundsCount"
-		:isFirst=" n == 1"
-		:isLast="n  == roundsCount"
+    v-for="n in roundsCount"
+		:roundNum="n" 
+		:isFirst="n == 1"
+		:isLast="n == roundsCount"
 		:playersCount="playersCount" 
 		:showList=showList>
 		</round>
@@ -20,19 +21,24 @@ import Round from './Round'
 
 export default {
   name: 'bracket',
+  data () {
+    return {
+      tree: []
+    }
+  },
   props: {
     playersCount: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true
     },
     originPlayersCount: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true
     }
   },
   computed: {
   	...mapGetters({
-		initData: 'initData'
+		  initData: 'initData'
 	  }),
   	roundsCount: function() {
   		return Math.log(this.playersCount) / Math.LN2
@@ -55,7 +61,9 @@ export default {
   },
   created () {
   	this.$store.dispatch('initBracket')
-  	console.log(this.initData)
+  },
+  mounted () {
+    console.log(this.$el)
   },
   components: {
     Round
@@ -66,20 +74,19 @@ export default {
   		if (index > 0 && index <= this.playersCount / 4) {
 	  		var zeroCount = roundsCount - 1
 	  		var base = Math.pow(10, zeroCount)
-			var iTemp = parseInt(base, 2) + index - 1;
-			var sTemp = iTemp.toString(2).split("").reverse().join("");	
-			return parseInt(sTemp,2);	
-		} else if (index > this.playersCount / 4 && index <= this.playersCount) {
-			return (index - this.playersCount / 4) * 2;
-		}
-	}
+  			var iTemp = parseInt(base, 2) + index - 1;
+  			var sTemp = iTemp.toString(2).split("").reverse().join("");	
+  			return parseInt(sTemp,2);	
+  		} else if (index > this.playersCount / 4 && index <= this.playersCount) {
+  			return (index - this.playersCount / 4) * 2;
+  		}
+  	}
   }
 }
 </script>
 
 <style>
 .bracket {
-	cursor: pointer;
 }
 .bracket:after {
 	content: '\20';

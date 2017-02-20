@@ -1,19 +1,31 @@
 <template>
 	<div 
 	class="match" 
-	v-bind:class="[type, {last: isLast}, {fisrt: isFirst}, {hidden: !visibleStatus}]">
+	v-bind:class="[
+        type, 
+        {last: isLast}, 
+        {fisrt: isFirst}, 
+        {hidden: !visibleStatus}]">
         <div class="players">
-    		<playerItem class="player1" :updown=false></playerItem>
-    		<playerItem class="player2" :updown=true></playerItem>
+    		<playerItem class="player1" :updown=false>
+            </playerItem>
+    		<playerItem class="player2" :updown=true>
+            </playerItem>
         </div>
 	</div>
 </template>
 
 <script>
 import PlayerItem from './PlayerItem'
+import UUID from 'uuid-js'
 
 export default {
   name: 'Match',
+  data () {
+    return {
+        matchId: UUID.create(4).toString()
+    }
+  },
   props: {
     even: {
         default: true,
@@ -33,6 +45,11 @@ export default {
     visibleStatus: {
         default: true,
         type: Boolean,
+        required: true
+    },
+    matchNum: {
+        default: 0,
+        type: Number,
         required: true
     }
   },

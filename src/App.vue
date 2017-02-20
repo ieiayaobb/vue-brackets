@@ -23,7 +23,7 @@ export default {
   name: 'app',
   data() {
     return {
-      playersCount: 13
+      playersCount: 9
     }
   },
   components: {
@@ -48,11 +48,20 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
   height: 800px;
+  font-family:"webfont" !important;
+  font-size:12px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {font-family: 'webfont';
+  src: url('//at.alicdn.com/t/jqqro26ufnf561or.eot'); /* IE9*/
+  src: url('//at.alicdn.com/t/jqqro26ufnf561or.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('//at.alicdn.com/t/jqqro26ufnf561or.woff') format('woff'), /* chrome、firefox */
+  url('//at.alicdn.com/t/jqqro26ufnf561or.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('//at.alicdn.com/t/jqqro26ufnf561or.svg#NotoSansHans-DemiLight') format('svg'); /* iOS 4.1- */
 }
 
 body {
@@ -60,12 +69,12 @@ body {
 }
 
 .control-bar {
-  width: 20%;
+  width: 100%;
   float: left;
 }
 
 .main {
-  width: 80%;
+  width: 960px;
   float: left;
 }
 

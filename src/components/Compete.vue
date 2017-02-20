@@ -1,8 +1,8 @@
 <template>
-	<div class="compete">
-		<playerItem class="player1" :updown=false></playerItem>
-		<playerItem class="player2" :updown=true></playerItem>
-	</div>
+  <div class="compete">
+    <playerItem class="player1" :updown=false></playerItem>
+    <playerItem class="player2" :updown=true></playerItem>
+  </div>
 </template>
 
 <script>

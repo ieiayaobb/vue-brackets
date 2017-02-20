@@ -4,9 +4,9 @@
 	class="drag-zone dragdealer" 
 	v-bind:class="[{scale: scaleUp}]">
 		<bracket 
+    class="bracket handle"
 		:playersCount=playersCount 
-		:originPlayersCount=originPlayersCount 
-		class="bracket handle">
+		:originPlayersCount=originPlayersCount >
 		</bracket>
 	</div>	
 </template>
@@ -77,6 +77,7 @@ export default {
 	/*}*/
 	.dragdealer {
 		overflow: hidden;
+    cursor: move;
 	}
 
   .scale {
