@@ -19,16 +19,15 @@
 import store from '../vuex/store'
 import { mapGetters } from 'vuex'
 import PlayerItem from './PlayerItem'
-import UUID from 'uuid-js'
 
 export default {
   name: 'Match',
   computed: mapGetters({
     allMatches: 'allMatches',
-    //sibling: 'match'
+    sibling: 'match'
   }),
   props: {
-    sequenceNum: {
+    matchNum: {
         default: 1,
         type: Number,
         required: true
@@ -74,7 +73,7 @@ export default {
   created() {
     this.$store.dispatch('getMatchByPos', {
         roundNum: this.$parent.roundNum, 
-        sequenceNum: this.sequenceNum
+        matchNum: this.matchNum
     })
   }
 }

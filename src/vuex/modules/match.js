@@ -18,7 +18,7 @@ const mutations = {
 	[FETCH_MATCH] (state, params) {
         var round = state['allMatches'][params.roundNum - 1]
         if(round != undefined) {
-            var match = round.$children[params.sequenceNum - 1]
+            var match = round.$children[params.matchNum - 1]
             console.log(match)
             // state['match'] = match
         }
