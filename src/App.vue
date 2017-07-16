@@ -35,6 +35,8 @@ export default {
       this.$store.dispatch('scaleNormal')
     }
   },
+  mounted() {
+  },
   store
 }
 </script>
@@ -49,7 +51,7 @@ export default {
 }
 
 body {
-  background-color: #1E2227;
+  background-color: #777777;
 }
 
 .adjust {

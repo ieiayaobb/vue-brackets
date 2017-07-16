@@ -1,5 +1,7 @@
 <template>
-	<div class="match" v-bind:class="[type, {last: isLast}, {fisrt: isFirst}, {hidden: !visibleStatus}]">
+	<div 
+        class="match" 
+        v-bind:class="[type, {last: isLast}, {fisrt: isFirst}, {hidden: !visibleStatus}]">
         <div class="players">
     		<playerItem class="player1" :updown=false></playerItem>
     		<playerItem class="player2" :updown=true></playerItem>
@@ -8,11 +10,22 @@
 </template>
 
 <script>
+import store from '../vuex/store'
+import { mapGetters } from 'vuex'
 import PlayerItem from './PlayerItem'
 
 export default {
   name: 'Match',
+  computed: mapGetters({
+    allMatches: 'allMatches',
+    //sibling: 'match'
+  }),
   props: {
+    sequenceNum: {
+        default: 1,
+        type: Number,
+        required: true
+    },
     even: {
         default: true,
         type: Boolean,
@@ -45,6 +58,12 @@ export default {
   },
   components: {
   	PlayerItem
+  },
+  created() {
+    this.$store.dispatch('getMatchByPos', {
+        roundNum: this.$parent.roundNum, 
+        sequenceNum: this.sequenceNum
+    })
   }
 }
 </script>
@@ -56,8 +75,8 @@ export default {
 
 .match {
 	position: relative;
-	width: 260px;
-	padding: 20px;
+	width: 210px;
+	padding: 0 20px 0 0;
 }
 
 .match:after {

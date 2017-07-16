@@ -1,7 +1,17 @@
 import {
 	SCALE_UP,
-	SCALE_NORMAL
+	SCALE_NORMAL,
+	INIT_MATCHES,
+	FETCH_MATCH
 } from '../vuex/mutation-types'
+
+export const initAllMatches = ({ commit }, params) => {
+	commit(INIT_MATCHES, params)
+}
+
+export const getMatchByPos = ({ commit }, params) => {
+	commit(FETCH_MATCH, params)
+}
 
 export const scaleUp = ({ commit }) => {
 	commit(SCALE_UP)

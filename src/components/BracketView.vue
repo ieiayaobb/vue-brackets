@@ -1,6 +1,9 @@
 <template>
 	<div class="drag-zone" v-bind:class="[{scale: scaleUp}]" @mousedown="dragStart" @mouseup="dragStop">
-		<bracket :playersCount=playersCount :originPlayersCount=originPlayersCount class="bracket">
+		<bracket 
+      :playersCount=playersCount 
+      :originPlayersCount=originPlayersCount 
+      class="bracket">
 		</bracket>
 	</div>	
 </template>
@@ -53,8 +56,9 @@ export default {
 
 <style>
 	.drag-zone {
+    display: inline-block;
+    background: #1E2227;
 		position: relative;
-    width: 2000px;
 		/*border: 1px #FFF solid;*/
 	}
 

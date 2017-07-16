@@ -1,6 +1,14 @@
 <template>
 	<div class="round">
-		<match :even="n % 2 != 0" v-for="n in matchNum" :isLast="isLast" :isFirst="isFirst" v-bind:style="{height: roundHeight}" :visibleStatus="visibleStatus(n)"></match>
+		<match 
+      :sequenceNum="n"
+      :even="n % 2 != 0" 
+      v-for="n in matchNum" 
+      :isLast="isLast" 
+      :isFirst="isFirst" 
+      v-bind:style="{height: roundHeight}" 
+      :visibleStatus="visibleStatus(n)">
+    </match>
 	</div>
 </template>
 
@@ -41,7 +49,7 @@ export default {
   },
   computed: {
   	roundHeight: function() {
-  		return Math.pow(2, this.roundNum - 1) * 92 + "px"
+  		return Math.pow(2, this.roundNum - 1) * 62 + "px"
   	},
     matchNum: function() {
       var num = this.playersCount / 2 / (Math.pow(2, this.roundNum - 1));
@@ -60,11 +68,13 @@ export default {
     	} else {
     		return true
     	}
-    }
+    },
   },
   components: {
   	Match
-  }
+  },
+  mounted() {
+  },
 }
 </script>
 
