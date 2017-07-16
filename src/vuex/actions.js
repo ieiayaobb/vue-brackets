@@ -1,8 +1,13 @@
 import {
+  loadMock
+} from '../api/index'
+
+import {
 	SCALE_UP,
 	SCALE_NORMAL,
 	INIT_MATCHES,
-	FETCH_MATCH
+	FETCH_MATCH,
+	INIT_BRACKET
 } from '../vuex/mutation-types'
 
 export const initAllMatches = ({ commit }, params) => {
@@ -18,3 +23,11 @@ export const scaleUp = ({ commit }) => {
 }
 
 export const scaleNormal = ({ commit }) => commit(SCALE_NORMAL)
+
+export const initBracket = ({ commit }) => {
+  loadMock(messages => {
+    commit(INIT_BRACKET, {
+      messages
+    })
+  })
+}

@@ -1,9 +1,16 @@
 <template>
   <div id="app">
-    <bracketView :playersCount=playersCount|adjust :originPlayersCount=playersCount></bracketView>
-    <input class="adjust" type="number" v-model.number="playersCount" step="1" />
-    <input type="button" value="缩小" @click="zoomIn" />
-    <input type="button" value="正常" @click="normal" />
+    <div class="control-bar">
+      <input class="adjust" type="number" v-model.number="playersCount" step="1" />
+      <input type="button" value="缩小" @click="zoomIn" />
+      <input type="button" value="正常" @click="normal" />
+    </div>
+    <div class="main">
+      <bracketView 
+      :playersCount=playersCount|adjust 
+      :originPlayersCount=playersCount>
+      </bracketView>
+    </div>
   </div>
 </template>
 
@@ -16,7 +23,7 @@ export default {
   name: 'app',
   data() {
     return {
-      playersCount: 13
+      playersCount: 9
     }
   },
   components: {
@@ -43,15 +50,34 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
   height: 800px;
+  font-family:"webfont" !important;
+  font-size:12px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {font-family: 'webfont';
+  src: url('//at.alicdn.com/t/jqqro26ufnf561or.eot'); /* IE9*/
+  src: url('//at.alicdn.com/t/jqqro26ufnf561or.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('//at.alicdn.com/t/jqqro26ufnf561or.woff') format('woff'), /* chrome、firefox */
+  url('//at.alicdn.com/t/jqqro26ufnf561or.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('//at.alicdn.com/t/jqqro26ufnf561or.svg#NotoSansHans-DemiLight') format('svg'); /* iOS 4.1- */
 }
 
 body {
   background-color: #777777;
+}
+
+.control-bar {
+  width: 100%;
+  float: left;
+}
+
+.main {
+  width: 960px;
+  float: left;
 }
 
 .adjust {

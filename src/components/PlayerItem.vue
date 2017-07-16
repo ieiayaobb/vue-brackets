@@ -1,11 +1,22 @@
 <template>
 	<div class="player-item">
 		<div class="thumbnail"></div>
-		<div class="player">
-			<span class="player-name" @click="edit" v-show="editing">{{ label }}</span>
-			<input ref="editing" class="editing" @blur="display" type="text" v-model="label" v-show="!editing" />
+		<div class="player" @mousedown.stop="edit">
+			<!-- <span class="player-name" v-show="editing">{{ label }}</span> -->
+			<input ref="editing" class="editing" @blur="display" type="text" v-model="label" />
 		</div>
-		<div class="score" v-bind:class="updownClass" @click="adjustScore">3</div>
+		<div class="score" v-bind:class="updownClass" @click.stop="adjustScore">{{ score }}</div>
+		<div v-show="control" class="control">
+			<div class="arrow-score-up-btn" @click.stop="increse">
+				<span class="arrow arrow-up"></span>
+			</div>
+			<div class="arrow-score-down-btn" @click.stop="decrese">
+				<span class="arrow arrow-down"></span>
+			</div>
+			<div class="arrow-promotion-btn">
+				<span class="arrow arrow-right"></span>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -21,7 +32,9 @@ export default {
   data() {
   	return {
   		editing: true,
-  		label: "原始咆哮"
+  		control: false,
+  		label: "原始咆哮",
+  		score: 0
   	}
   },
   computed: {
@@ -36,14 +49,20 @@ export default {
   methods: {
   	edit: function(e) {
   		this.editing = false
-  		// console.log(this.$refs.editing)
-  		this.$refs.editing.focus()
+  		console.log(this.$refs.editing)
+  		// this.$refs.editing.focus()
   	},
   	display: function(e) {
   		this.editing = true
   	},
-  	adjustScore: function(e){
-  		console.log(e)
+  	adjustScore: function(e) {
+  		this.control = !this.control
+  	},
+  	increse: function(e) {
+  		this.score ++;
+  	},
+  	decrese: function(e) {
+  		this.score --;
   	}
   }
 }
@@ -103,6 +122,74 @@ export default {
 	text-align: center;
 	padding-top: 6px;
 	cursor: pointer;
+}
+
+.control {
+	float: left;
+	position: relative;
+}
+
+.arrow {
+	cursor: pointer;
+}
+
+.arrow-up {
+	position:relative;
+	top: -9px;
+	left: 6px;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-bottom: 6px solid #FFF;
+}
+
+.arrow-score-up-btn {
+	position: relative;
+	background-color: #373D44;
+	top: -15px;
+	left: -26px;
+	width: 24px;
+	height: 12px;
+	border-radius: 2px;
+}
+
+.arrow-down {
+	position: relative;
+	top: 10px;
+	left: 5px;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid #FFF;
+}
+
+.arrow-score-down-btn {
+	position: relative;
+	background-color: #373D44;
+	top: 15px;
+	left: -26px;
+	width: 24px;
+	height: 12px;
+	border-radius: 2px;
+}
+
+.arrow-right {
+	position: absolute;
+	top: 6px;
+	left: 4px;
+	width: 0; 
+	height: 0; 
+	border-top: 6px solid transparent;
+	border-bottom: 6px solid transparent;
+	border-left: 6px solid #FFF;
+}
+
+.arrow-promotion-btn {
+	position: absolute;
+	background-color: #373D44;
+	top: 2px;
+	left: 5px;
+	width: 14px;
+	height: 24px;
+	border-radius: 2px;
 }
 
 .up {
