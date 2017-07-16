@@ -23,7 +23,7 @@ export default {
   name: 'app',
   data() {
     return {
-      playersCount: 9
+      playersCount: 10
     }
   },
   components: {

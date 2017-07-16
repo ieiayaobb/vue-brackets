@@ -5,7 +5,9 @@
         type, 
         {last: isLast}, 
         {fisrt: isFirst}, 
-        {hidden: !visibleStatus}]">
+        {hidden: !visibleStatus},
+        {single: isSingle},
+        {emptyFirst: isEmptyFirst}]">
         <div class="players">
     		<playerItem class="player1" :updown=false>
             </playerItem>
@@ -23,8 +25,7 @@ import PlayerItem from './PlayerItem'
 export default {
   name: 'Match',
   computed: mapGetters({
-    allMatches: 'allMatches',
-    sibling: 'match'
+    allMatchesLength: 'allMatchesLength'
   }),
   props: {
     matchNum: {
@@ -58,6 +59,12 @@ export default {
         required: true
     }
   },
+  data() {
+    return {
+        isSingle: false,
+        isEmptyFirst: false
+    }
+  },
   computed: {
     type: function() {
         if (this.even) {
@@ -70,11 +77,45 @@ export default {
   components: {
   	PlayerItem
   },
-  created() {
-    this.$store.dispatch('getMatchByPos', {
-        roundNum: this.$parent.roundNum, 
-        matchNum: this.matchNum
-    })
+  watch: {
+      allMatchesLength: function(val, oldVal) {
+          console.log(222)
+      }
+  },
+  methods: {
+      refreshSingleLayout: function() {
+        var roundNum = this.$parent.roundNum
+        var siblings = this.$parent.$children
+        if (roundNum == 1 && this.matchNum % 2 == 1) {
+            if(this.visibleStatus) {
+                var sibling = siblings[this.matchNum]
+                if (!sibling.visibleStatus) {
+                    this.isSingle = true
+                } else {
+                    this.isSingle = false
+                }
+            }
+        }
+        if (roundNum == 2) {
+            var parent = this.$parent.$parent.$children[0].$children[(this.matchNum - 1) * 2]
+            if (!parent.visibleStatus) {
+                this.isEmptyFirst = true
+            } else {
+                this.isEmptyFirst = false
+            }
+        }
+      }
+  },
+  mounted() {
+    this.refreshSingleLayout()
+  },
+  updated() {
+    this.refreshSingleLayout()
+  },
+  vuex: {
+    getters: {
+      allMatchesLength: (state) => state.allMatchesLength
+    }
   }
 }
 </script>
@@ -88,6 +129,10 @@ export default {
 	position: relative;
 	width: 210px;
 	padding: 0 20px 0 0;
+}
+
+.single {
+    top: 33px;
 }
 
 .match:after {
@@ -139,10 +184,18 @@ export default {
 }
 
 .fisrt:after {
-    content: none;    
+    content: none;
 }
 
 .last:before {
+    content: none;
+}
+
+.single:before {
+    border-right-width: 0;
+}
+
+.emptyFirst:after {
     content: none;
 }
 

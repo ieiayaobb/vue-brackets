@@ -66,7 +66,7 @@ export default {
   	this.$store.dispatch('initBracket')
   },
   mounted () {
-    console.log(this.$el)
+    // console.log(this.$el)
   },
   components: {
     Round
@@ -85,8 +85,16 @@ export default {
   		}
   	}
   },
-  created() {
-		this.$store.dispatch('initAllMatches', this.$children)
+	updated() {
+		var total = 0
+		this.$children.forEach(round => {
+			round.$children.forEach(match => {
+				if (match.visibleStatus) {
+					total ++;
+				}
+			})
+		})
+		// this.$store.dispatch('initAllMatchesLength', total)
   },
 }
 </script>

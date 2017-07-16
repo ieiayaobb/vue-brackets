@@ -49,12 +49,12 @@ export default {
 	  });
   },
   beforeUpdate () {
-    console.log('beforeUpdate')
+    // console.log('beforeUpdate')
   	// this.dragdealer.reflow()
   },
   updated () {
-    console.log('updated')
-    this.dragdealer.reflow()
+    // console.log('updated')
+    // this.dragdealer.reflow()
   },
   methods: {
   },
@@ -78,6 +78,7 @@ export default {
 	.dragdealer {
 		overflow: hidden;
     cursor: move;
+    background-color: #1E2227
 	}
 
   .scale {

@@ -5,13 +5,13 @@ import {
 import {
 	SCALE_UP,
 	SCALE_NORMAL,
-	INIT_MATCHES,
+	INIT_MATCHES_LENGTH,
 	FETCH_MATCH,
 	INIT_BRACKET
 } from '../vuex/mutation-types'
 
-export const initAllMatches = ({ commit }, params) => {
-	commit(INIT_MATCHES, params)
+export const initAllMatchesLength = ({ commit }, params) => {
+	commit(INIT_MATCHES_LENGTH, params)
 }
 
 export const getMatchByPos = ({ commit }, params) => {
