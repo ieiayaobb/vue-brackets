@@ -85,17 +85,19 @@ export default {
   		}
   	}
   },
-	updated() {
-		var total = 0
-		this.$children.forEach(round => {
-			round.$children.forEach(match => {
-				if (match.visibleStatus) {
-					total ++;
-				}
+	watch: {
+		originPlayersCount: function(val, oldVal) {
+			var total = 0
+			this.$children.forEach(round => {
+				round.$children.forEach(match => {
+					if (match.visibleStatus) {
+						total ++;
+					}
+				})
 			})
-		})
-		// this.$store.dispatch('initAllMatchesLength', total)
-  },
+			this.$store.dispatch('initAllMatchesLength', total)
+		}
+	},
 }
 </script>
 

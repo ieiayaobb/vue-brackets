@@ -7,7 +7,7 @@
         {fisrt: isFirst}, 
         {hidden: !visibleStatus},
         {single: isSingle},
-        {emptyFirst: isEmptyFirst}]">
+        {empty_first: isEmptyFirst}]">
         <div class="players">
     		<playerItem class="player1" :updown=false>
             </playerItem>
@@ -24,9 +24,6 @@ import PlayerItem from './PlayerItem'
 
 export default {
   name: 'Match',
-  computed: mapGetters({
-    allMatchesLength: 'allMatchesLength'
-  }),
   props: {
     matchNum: {
         default: 1,
@@ -66,6 +63,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+        allMatchesLength: 'allMatchesLength'
+    }),
     type: function() {
         if (this.even) {
             return "match-even";
@@ -79,7 +79,7 @@ export default {
   },
   watch: {
       allMatchesLength: function(val, oldVal) {
-          console.log(222)
+          this.refreshSingleLayout()
       }
   },
   methods: {
@@ -110,7 +110,7 @@ export default {
     this.refreshSingleLayout()
   },
   updated() {
-    this.refreshSingleLayout()
+    
   },
   vuex: {
     getters: {
@@ -195,7 +195,7 @@ export default {
     border-right-width: 0;
 }
 
-.emptyFirst:after {
+.empty_first:after {
     content: none;
 }
 
