@@ -1,14 +1,8 @@
 <template>
-	<div class="round">
-		<match 
-    v-bind:style="{height: roundHeight}"
-		:even="n % 2 != 0" v-for="n in matchCount" 
-		:isLast="isLast" 
-		:isFirst="isFirst" 
-    :matchNum="n"
-		:visibleStatus="visibleStatus(n)">
-		</match>
-	</div>
+  <div class="round">
+    <match v-bind:style="{height: roundHeight}" :even="n % 2 != 0" v-for="n in matchCount" :isLast="isLast" :isFirst="isFirst" :roundNum="roundNum" :matchNum="n" :visibleStatus="visibleStatus(n)">
+    </match>
+  </div>
 </template>
 
 <script>
@@ -16,7 +10,7 @@ import Match from './Match'
 
 export default {
   name: 'Round',
-  data: function() {
+  data: function () {
     return {
       show: true
     }
@@ -38,39 +32,39 @@ export default {
       required: false
     },
     playersCount: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true
     },
     showList: {
-        type: Array,
-        required: true
+      type: Array,
+      required: true
     }
   },
   computed: {
-  	roundHeight: function() {
-  		return Math.pow(2, this.roundNum - 1) * 62 + "px"
-  	},
-    matchCount: function() {
+    roundHeight: function () {
+      return Math.pow(2, this.roundNum - 1) * 62 + "px"
+    },
+    matchCount: function () {
       var num = this.playersCount / 2 / (Math.pow(2, this.roundNum - 1));
       return num
     }
   },
   methods: {
-    visibleStatus: function(index) {
-    	if (this.isFirst){
-    		for (var i = 0; i < this.showList.length; i++) {
-    			if (this.showList[i] == index){
-    				return true
-    			}
-    		}
-        	return false
-    	} else {
-    		return true
-    	}
+    visibleStatus: function (index) {
+      if (this.isFirst) {
+        for (var i = 0; i < this.showList.length; i++) {
+          if (this.showList[i] == index) {
+            return true
+          }
+        }
+        return false
+      } else {
+        return true
+      }
     },
   },
   components: {
-  	Match
+    Match
   },
   mounted() {
   },
@@ -79,7 +73,7 @@ export default {
 
 <style>
 .round {
-	float: left;
-	margin-left: 20px;
+  float: left;
+  margin-left: 20px;
 }
 </style>

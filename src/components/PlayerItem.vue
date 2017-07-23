@@ -3,9 +3,9 @@
 		<div class="thumbnail"></div>
 		<div class="player" @mousedown.stop="edit">
 			<!-- <span class="player-name" v-show="editing">{{ label }}</span> -->
-			<input ref="editing" class="editing" @blur="display" type="text" v-model="label" />
+			<input ref="editing" class="editing" @blur="display" type="text" v-model="playerInfo.name" />
 		</div>
-		<div class="score" v-bind:class="updownClass" @click.stop="adjustScore">{{ score }}</div>
+		<div class="score" v-bind:class="updownClass" @click.stop="adjustScore">{{ playerInfo.score }}</div>
 		<div v-show="control" class="control">
 			<div class="arrow-score-up-btn" @click.stop="increse">
 				<span class="arrow arrow-up"></span>
@@ -27,14 +27,17 @@ export default {
   	updown: {
   		type: Boolean,
   		required: true
-  	}
+  	},
+	playerInfo: {
+		default: {},
+		type: Object,
+		required: false
+	}
   },
   data() {
   	return {
   		editing: true,
   		control: false,
-  		label: "原始咆哮",
-  		score: 0
   	}
   },
   computed: {

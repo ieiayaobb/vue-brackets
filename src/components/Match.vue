@@ -7,9 +7,9 @@
             {single: isSingle},
             {empty_first: isEmptyFirst}]">
         <div class="players">
-            <playerItem class="player1" :updown=false>
+            <playerItem class="player1" :playerInfo="match.player_a" :updown=false>
             </playerItem>
-            <playerItem class="player2" :updown=true>
+            <playerItem class="player2" :playerInfo="match.player_b" :updown=true>
             </playerItem>
         </div>
     </div>
@@ -19,10 +19,16 @@
 import store from '../vuex/store'
 import { mapGetters } from 'vuex'
 import PlayerItem from './PlayerItem'
+import sample_data from '../data/mock.js'
 
 export default {
     name: 'Match',
     props: {
+        roundNum: {
+            default: 1,
+            type: Number,
+            required: true
+        },
         matchNum: {
             default: 1,
             type: Number,
@@ -57,12 +63,16 @@ export default {
     data() {
         return {
             isSingle: false,
-            isEmptyFirst: false
+            isEmptyFirst: false,
+            match: {
+                'player_a': {},
+                'player_b': {}
+            }
         }
     },
     computed: {
         ...mapGetters({
-            allMatchesLength: 'allMatchesLength'
+            initData: 'initData'
         }),
         type: function () {
             if (this.even) {
@@ -104,15 +114,26 @@ export default {
             }
         }
     },
-    mounted() {
+    created () {
+        if (this.visibleStatus) {
+            var round = this.initData[this.roundNum - 1]
+            if (round) {
+                var match = round[this.matchNum - 1]
+                if (match) {
+                    this.match = match
+                }
+            }
+        }
+    },
+    mounted () {
         this.refreshSingleLayout()
     },
-    updated() {
+    updated () {
 
     },
     vuex: {
         getters: {
-            allMatchesLength: (state) => state.allMatchesLength
+            initData: (state) => state.initData
         }
     }
 }

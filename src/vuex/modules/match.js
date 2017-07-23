@@ -1,5 +1,4 @@
 import {
-	FETCH_MATCH,
     INIT_MATCHES_LENGTH,
 } from '../mutation-types'
 
@@ -14,17 +13,7 @@ const getters = {
 const mutations = {
     [INIT_MATCHES_LENGTH] (state, params) {
         state.allMatchesLength = params
-    },
-	[FETCH_MATCH] (state, params) {
-        var round = state['allMatches'][params.roundNum - 1]
-        if(round != undefined) {
-            console.log(round.$children)
-            var match = round.$children[params.matchNum - 1]
-            console.log(match)
-            // state['match'] = match
-        }
-        
-	}
+    }
 }
 
 export default {

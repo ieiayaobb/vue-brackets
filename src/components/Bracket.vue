@@ -1,7 +1,7 @@
 <template>
 	<div class="bracket" v-bind:style="{
-	    width: bracketWidth, 
-	    height: bracketHeight}">
+		    width: bracketWidth, 
+		    height: bracketHeight}">
 		<round v-for="n in roundsCount" :roundNum="n" :isFirst="n == 1" :isLast="n == roundsCount" :playersCount="playersCount" :showList=showList>
 		</round>
 	</div>
@@ -12,7 +12,6 @@ import store from '../vuex/store'
 import { mapGetters } from 'vuex'
 import Round from './Round'
 import _ from 'lodash'
-import sample_data from '../data/mock.js'
 
 export default {
 	name: 'bracket',
@@ -33,10 +32,12 @@ export default {
 	},
 	computed: {
 		...mapGetters({
-			initData: 'initData'
+			totalCount: 'totalCount'
 		}),
 		roundsCount: function () {
 			return Math.log(this.playersCount) / Math.LN2
+		},
+		roundsData: function () {
 		},
 		bracketWidth: function () {
 			// return "1000px"
@@ -56,18 +57,7 @@ export default {
 			return show_list
 		}
 	},
-	created() {
-		this.$store.dispatch('initBracket')
-		var root;
-		var tree = {}
-		_.forEach(sample_data, function (match) {
-			tree[match.id] = match
-			if (match.pid == '-1') {
-				root = tree[match.id]
-			}
-		})
-		console.log(tree)
-	},
+	
 	mounted() {
 		// console.log(this.$el)
 	},

@@ -6,7 +6,7 @@
 		<bracket 
     class="bracket handle"
 		:playersCount=playersCount 
-		:originPlayersCount=originPlayersCount >
+		:originPlayersCount=originPlayersCount>
 		</bracket>
 	</div>
 </template>
