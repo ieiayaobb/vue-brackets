@@ -1,20 +1,18 @@
 <template>
-	<div 
-	class="match" 
-	v-bind:class="[
-        type, 
-        {last: isLast}, 
-        {fisrt: isFirst}, 
-        {hidden: !visibleStatus},
-        {single: isSingle},
-        {empty_first: isEmptyFirst}]">
+    <div class="match" v-bind:class="[
+            type, 
+            {last: isLast}, 
+            {fisrt: isFirst}, 
+            {hidden: !visibleStatus},
+            {single: isSingle},
+            {empty_first: isEmptyFirst}]">
         <div class="players">
-    		<playerItem class="player1" :updown=false>
+            <playerItem class="player1" :updown=false>
             </playerItem>
-    		<playerItem class="player2" :updown=true>
+            <playerItem class="player2" :updown=true>
             </playerItem>
         </div>
-	</div>
+    </div>
 </template>
 
 <script>
@@ -23,112 +21,112 @@ import { mapGetters } from 'vuex'
 import PlayerItem from './PlayerItem'
 
 export default {
-  name: 'Match',
-  props: {
-    matchNum: {
-        default: 1,
-        type: Number,
-        required: true
-    },
-    even: {
-        default: true,
-        type: Boolean,
-        required: true
-    },
-    isFirst: {
-        default: false,
-        type: Boolean,
-        required: false
-    },
-    isLast: {
-        default: false,
-        type: Boolean,
-        required: false
-    },
-    visibleStatus: {
-        default: true,
-        type: Boolean,
-        required: true
-    },
-    matchNum: {
-        default: 0,
-        type: Number,
-        required: true
-    }
-  },
-  data() {
-    return {
-        isSingle: false,
-        isEmptyFirst: false
-    }
-  },
-  computed: {
-    ...mapGetters({
-        allMatchesLength: 'allMatchesLength'
-    }),
-    type: function() {
-        if (this.even) {
-            return "match-even";
-        } else {
-            return "match-odd";
+    name: 'Match',
+    props: {
+        matchNum: {
+            default: 1,
+            type: Number,
+            required: true
+        },
+        even: {
+            default: true,
+            type: Boolean,
+            required: true
+        },
+        isFirst: {
+            default: false,
+            type: Boolean,
+            required: false
+        },
+        isLast: {
+            default: false,
+            type: Boolean,
+            required: false
+        },
+        visibleStatus: {
+            default: true,
+            type: Boolean,
+            required: true
+        },
+        matchNum: {
+            default: 0,
+            type: Number,
+            required: true
         }
-    }
-  },
-  components: {
-  	PlayerItem
-  },
-  watch: {
-      allMatchesLength: function(val, oldVal) {
-          this.refreshSingleLayout()
-      }
-  },
-  methods: {
-      refreshSingleLayout: function() {
-        var roundNum = this.$parent.roundNum
-        var siblings = this.$parent.$children
-        if (roundNum == 1 && this.matchNum % 2 == 1) {
-            if(this.visibleStatus) {
-                var sibling = siblings[this.matchNum]
-                if (!sibling.visibleStatus) {
-                    this.isSingle = true
+    },
+    data() {
+        return {
+            isSingle: false,
+            isEmptyFirst: false
+        }
+    },
+    computed: {
+        ...mapGetters({
+            allMatchesLength: 'allMatchesLength'
+        }),
+        type: function () {
+            if (this.even) {
+                return "match-even";
+            } else {
+                return "match-odd";
+            }
+        }
+    },
+    components: {
+        PlayerItem
+    },
+    watch: {
+        allMatchesLength: function (val, oldVal) {
+            this.refreshSingleLayout()
+        }
+    },
+    methods: {
+        refreshSingleLayout: function () {
+            var roundNum = this.$parent.roundNum
+            var siblings = this.$parent.$children
+            if (roundNum == 1 && this.matchNum % 2 == 1) {
+                if (this.visibleStatus) {
+                    var sibling = siblings[this.matchNum]
+                    if (!sibling.visibleStatus) {
+                        this.isSingle = true
+                    } else {
+                        this.isSingle = false
+                    }
+                }
+            }
+            if (roundNum == 2) {
+                var parent = this.$parent.$parent.$children[0].$children[(this.matchNum - 1) * 2]
+                if (!parent.visibleStatus) {
+                    this.isEmptyFirst = true
                 } else {
-                    this.isSingle = false
+                    this.isEmptyFirst = false
                 }
             }
         }
-        if (roundNum == 2) {
-            var parent = this.$parent.$parent.$children[0].$children[(this.matchNum - 1) * 2]
-            if (!parent.visibleStatus) {
-                this.isEmptyFirst = true
-            } else {
-                this.isEmptyFirst = false
-            }
+    },
+    mounted() {
+        this.refreshSingleLayout()
+    },
+    updated() {
+
+    },
+    vuex: {
+        getters: {
+            allMatchesLength: (state) => state.allMatchesLength
         }
-      }
-  },
-  mounted() {
-    this.refreshSingleLayout()
-  },
-  updated() {
-    
-  },
-  vuex: {
-    getters: {
-      allMatchesLength: (state) => state.allMatchesLength
     }
-  }
 }
 </script>
 
 <style>
 .hidden {
-	visibility: hidden;
+    visibility: hidden;
 }
 
 .match {
-	position: relative;
-	width: 210px;
-	padding: 0 20px 0 0;
+    position: relative;
+    width: 210px;
+    padding: 0 20px 0 0;
 }
 
 .single {
@@ -148,8 +146,9 @@ export default {
 }
 
 .match-even:before {
-	content: ' ';
-    position: absolute;;
+    content: ' ';
+    position: absolute;
+    ;
     display: block;
     width: 15px;
     height: 50%;
@@ -163,7 +162,8 @@ export default {
 
 .match-odd:before {
     content: ' ';
-    position: absolute;;
+    position: absolute;
+    ;
     display: block;
     width: 15px;
     height: 50%;
@@ -198,5 +198,4 @@ export default {
 .empty_first:after {
     content: none;
 }
-
 </style>

@@ -8,7 +8,7 @@
 		:playersCount=playersCount 
 		:originPlayersCount=originPlayersCount >
 		</bracket>
-	</div>	
+	</div>
 </template>
 
 <script>
