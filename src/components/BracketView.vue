@@ -57,6 +57,7 @@ export default {
     // this.dragdealer.reflow()
   },
   methods: {
+    
   },
   components: {
     Bracket

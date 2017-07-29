@@ -6,9 +6,10 @@
       <input type="button" value="正常" @click="normal" />
     </div>
     <div class="main">
-      <bracketView :playersCount=totalCount|adjust :originPlayersCount=totalCount>
+      <bracketView ref="bracket_view" :playersCount=totalCount|adjust :originPlayersCount=totalCount>
       </bracketView>
     </div>
+    <input type="button" value="capture" @click="capture" />
   </div>
 </template>
 
@@ -17,6 +18,7 @@ import store from './vuex/store'
 import { mapGetters } from 'vuex'
 import './reset.css'
 import BracketView from './components/BracketView'
+import html2canvas from 'html2canvas'
 
 export default {
   name: 'app',
@@ -39,6 +41,14 @@ export default {
     }
   },
   methods: {
+    capture: function (e) {
+      html2canvas(this.$refs.bracket_view[0], {
+        onrendered: function(canvas) {
+          var img = canvas.toDataURL("image/png");
+          location = img;
+        }
+      });
+    },
     zoomIn: function (e) {
       this.$store.dispatch('scaleUp')
     },

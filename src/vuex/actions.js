@@ -7,7 +7,8 @@ import {
 	SCALE_NORMAL,
 	INIT_MATCHES_LENGTH,
 	FETCH_MATCH,
-	INIT_BRACKET
+	INIT_BRACKET,
+	CAPTURE
 } from '../vuex/mutation-types'
 
 export const initAllMatchesLength = ({ commit }, params) => {
@@ -30,4 +31,8 @@ export const initBracket = ({ commit }) => {
       messages
     })
   })
+}
+
+export const capture = ({ commit }) => {
+	commit(CAPTURE)
 }
