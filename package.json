@@ -14,7 +14,8 @@
     "vue-resource": "1.0.3",
     "uuid": "*",
     "lodash": "*",
-    "html2canvas": "*"
+    "html2canvas": "*",
+    "faker": "*"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
