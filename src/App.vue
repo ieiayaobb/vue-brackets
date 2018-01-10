@@ -6,7 +6,9 @@
       <input type="button" value="正常" @click="normal" />
     </div>
     <div class="main">
-      <bracketView ref="bracket_view" :playersCount=totalCount|adjust :originPlayersCount=totalCount>
+      <bracketView ref="bracket_view" 
+      :playersCount=totalCount|adjust 
+      :originPlayersCount=totalCount>
       </bracketView>
     </div>
     <input type="button" value="capture" @click="capture" />
@@ -22,14 +24,14 @@ import html2canvas from 'html2canvas'
 
 export default {
   name: 'app',
-  computed: {
-    ...mapGetters({
-      totalCount: 'totalCount'
-    })
-  },
+  // computed: {
+  //   ...mapGetters({
+  //     totalCount: 'totalCount'
+  //   })
+  // },
   data() {
     return {
-      playersCount: 10
+      totalCount: 10
     }
   },
   components: {
@@ -57,13 +59,13 @@ export default {
     }
   },
   created () {
-		this.$store.dispatch('initBracket')
+		// this.$store.dispatch('initBracket')
 	},
-  vuex: {
-    getters: {
-      totalCount: (state) => state.totalCount
-    }
-  },
+  // vuex: {
+  //   getters: {
+  //     totalCount: (state) => state.totalCount
+  //   }
+  // },
   store
 }
 </script>

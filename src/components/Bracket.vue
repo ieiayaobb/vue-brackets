@@ -2,7 +2,13 @@
 	<div class="bracket" v-bind:style="{
 		    width: bracketWidth, 
 		    height: bracketHeight}">
-		<round v-for="n in roundsCount" :roundNum="n" :isFirst="n == 1" :isLast="n == roundsCount" :playersCount="playersCount" :showList=showList>
+		<round 
+		v-for="n in roundsCount" 
+		:roundNum="n" 
+		:isFirst="n == 1" 
+		:isLast="n == roundsCount" 
+		:playersCount="playersCount" 
+		:showList=showList>
 		</round>
 	</div>
 </template>
@@ -32,7 +38,7 @@ export default {
 	},
 	computed: {
 		...mapGetters({
-			totalCount: 'totalCount'
+			// totalCount: 'totalCount'
 		}),
 		roundsCount: function () {
 			return Math.log(this.playersCount) / Math.LN2
@@ -96,7 +102,7 @@ export default {
 
 <style>
 .bracket {
-	cursor: move; // overflow: auto;
+	cursor: move;
 }
 
 .bracket:after {

@@ -71,9 +71,9 @@ export default {
         }
     },
     computed: {
-        ...mapGetters({
-            initData: 'initData'
-        }),
+        // ...mapGetters({
+        //     initData: 'initData'
+        // }),
         type: function () {
             if (this.even) {
                 return "match-even";
@@ -115,15 +115,15 @@ export default {
         }
     },
     created () {
-        if (this.visibleStatus) {
-            var round = this.initData[this.roundNum - 1]
-            if (round) {
-                var match = round[this.matchNum - 1]
-                if (match) {
-                    this.match = match
-                }
-            }
-        }
+        // if (this.visibleStatus) {
+        //     var round = this.initData[this.roundNum - 1]
+        //     if (round) {
+        //         var match = round[this.matchNum - 1]
+        //         if (match) {
+        //             this.match = match
+        //         }
+        //     }
+        // }
     },
     mounted () {
         this.refreshSingleLayout()
@@ -131,11 +131,11 @@ export default {
     updated () {
 
     },
-    vuex: {
-        getters: {
-            initData: (state) => state.initData
-        }
-    }
+    // vuex: {
+    //     getters: {
+    //         initData: (state) => state.initData
+    //     }
+    // }
 }
 </script>
 
