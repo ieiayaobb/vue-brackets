@@ -15,7 +15,8 @@
     "uuid": "*",
     "lodash": "*",
     "html2canvas": "*",
-    "faker": "*"
+    "faker": "*",
+    "dragdealer": "*"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
