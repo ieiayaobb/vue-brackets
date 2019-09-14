@@ -2,6 +2,8 @@
 
 > A Vue.js project
 
+> Demo URL: https://vue-bracket.s3.amazonaws.com/index.html
+
 ## Build Setup
 
 ``` bash
